@@ -1,0 +1,12 @@
+<component>
+  <sectiontype name="bz2storage" datatype="bc.bz2storage.ZConfig"
+               implements="ZODB.storage">
+    <section type="ZODB.storage" name="*" attribute="base" required="yes" />
+    <key name="compress" datatype="boolean" required="no" />
+  </sectiontype>
+  <sectiontype name="serverbz2storage" datatype="bc.bz2storage.ZConfigServer"
+               implements="ZODB.storage">
+    <section type="ZODB.storage" name="*" attribute="base" required="yes" />
+    <key name="compress" datatype="boolean" required="no" />
+  </sectiontype>
+</component>

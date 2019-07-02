@@ -1,0 +1,7 @@
+include src/bc/bz2storage/README.txt
+include src/bc/bz2storage/component.xml
+include bootstrap.py
+include buildout.cfg
+include tox.ini
+include .qpaycm.yml
+include *.rst
