@@ -2,7 +2,7 @@
 ZODB storage wrapper for bz2 compression of database records
 =============================================================
 
-The ``bc.bz2storage`` package provides ZODB storage wrapper
+The ``zc.bz2storage`` package provides ZODB storage wrapper
 implementations that provides compression of database records.
 
 .. contents::
@@ -10,13 +10,13 @@ implementations that provides compression of database records.
 Usage
 =====
 
-The primary storage is ``bc.bz2storage.Bz2Storage``.  It is used as
+The primary storage is ``zc.bz2storage.Bz2Storage``.  It is used as
 a wrapper around a lower-level storage.  From Python, it is
 constructed by passing another storage, as in::
 
-    import ZODB.FileStorage, bc.bz2storage
+    import ZODB.FileStorage, zc.bz2storage
 
-    storage = bc.bz2storage.Bz2Storage(
+    storage = zc.bz2storage.Bz2Storage(
         ZODB.FileStorage.FileStorage('data.fs'))
 
 .. -> src
@@ -30,7 +30,7 @@ constructed by passing another storage, as in::
 
 When using a ZODB configuration file, the bz2storage tag is used::
 
-    %import bc.bz2storage
+    %import zc.bz2storage
 
     <zodb>
       <bz2storage>
@@ -60,7 +60,7 @@ operations that need to get at uncompressed record data can do so.
 This is accomplished using the ``serverbz2storage`` tag in your ZEO
 server configuration file::
 
-    %import bc.bz2storage
+    %import zc.bz2storage
 
     <zeo>
       address 8100
@@ -97,9 +97,9 @@ uncompressed when read from the storage.  A ``compress`` option can be
 used to disable compression of records but still uncompress compressed
 records if they are encountered. Here's an example from in Python::
 
-    import ZODB.FileStorage, bc.bz2storage
+    import ZODB.FileStorage, zc.bz2storage
 
-    storage = bc.bz2storage.Bz2Storage(
+    storage = zc.bz2storage.Bz2Storage(
         ZODB.FileStorage.FileStorage('data.fs'),
         compress=False)
 
@@ -112,7 +112,7 @@ records if they are encountered. Here's an example from in Python::
 
 and using the configurationb syntax::
 
-    %import bc.bz2storage
+    %import zc.bz2storage
 
     <zodb>
       <bz2storage>
@@ -144,10 +144,10 @@ Compressing entire databases
 One way to compress all of the records in a database is to copy data
 from an uncompressed database to a compressed one, as in::
 
-    import ZODB.FileStorage, bc.bz2storage
+    import ZODB.FileStorage, zc.bz2storage
 
     orig = ZODB.FileStorage.FileStorage('data.fs')
-    new = bc.bz2storage.Bz2Storage(
+    new = zc.bz2storage.Bz2Storage(
         ZODB.FileStorage.FileStorage('data.fs-copy'))
     new.copyTransactionsFrom(orig)
 
@@ -165,7 +165,7 @@ from an uncompressed database to a compressed one, as in::
 
     >>> exec(src)
 
-    >>> new = bc.bz2storage.Bz2Storage(
+    >>> new = zc.bz2storage.Bz2Storage(
     ...     ZODB.FileStorage.FileStorage('data.fs-copy'))
     >>> conn = ZODB.connection(new)
     >>> dict(conn.root.a) == dict([(i,i) for i in range(1000)])
@@ -194,7 +194,7 @@ Stand-alone Compression and decompression functions
 In anticipation of wanting to plug the compression and decompression
 logic into other tools without creating storages, the functions used
 to compress and uncompress data records are available as
-``bc.bz2storage`` module-level functions:
+``zc.bz2storage`` module-level functions:
 
 ``compress(data)``
    Compress the given data if:
@@ -212,5 +212,5 @@ to compress and uncompress data records are available as
 
 .. basic sanity check :)
 
-   >>> _ = (bc.bz2storage.compress, bc.bz2storage.decompress)
+   >>> _ = (zc.bz2storage.compress, zc.bz2storage.decompress)
 
