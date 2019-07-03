@@ -2,13 +2,13 @@
 
 ## Introduction
 
-The ``bc.bz2storage`` package provides ZODB storage wrapper
+The ``zc.bz2storage`` package provides ZODB storage wrapper
 implementations that provides compression of database records.
 
 Bz2 version gives significant improvement of the compression.
 Originally, tested on JSON format 368kb string which resulted:
 103kb zc.zlibstorage
-78kb bc.bz2storage
+78kb zc.bz2storage
 
 ## Table of contens
 * [Installation](#installation)
@@ -17,8 +17,8 @@ Originally, tested on JSON format 368kb string which resulted:
 
 ### Installation
 
-    pip install bc.bz2sotrage
-    pip install git+https://github.com/qpaycm/bc/bz2storage
+    pip install zc.bz2sotrage
+    pip install git+https://github.com/qpaycm/zc/bz2storage
     
 ### Usage
     
