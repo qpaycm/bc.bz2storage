@@ -32,24 +32,13 @@ entry_points = """
 from setuptools import setup
 import os
 
-
-def read(filename):
-    with open(filename) as f:
-        return f.read()
-
-
-readme = read(os.path.join('src', *name.split('.') + ['README.txt']))
-changes = read('CHANGES.rst')
-long_description = readme + '\n\n' + changes
-
 setup(
     author='vir2alexport',
     author_email='vir2alexport@gmail.com',
     license='ZPL 2.1',
 
     name=name, version=version,
-    long_description=long_description,
-    description=long_description.split('\n')[1],
+    description='ZODB storage wrapper for bz2 compression of database records',
     classifiers=[
         "Programming Language :: Python",
         'Programming Language :: Python :: 2.7',
