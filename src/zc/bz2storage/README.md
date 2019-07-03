@@ -18,9 +18,7 @@ Originally, tested on JSON format 368kb string which resulted:
 
 ### Installation
 
-	pip install zc.bz2storage
-	or
-    pip install git+https://github.com/qpaycm/zc.bz2storage
+	pip install git+https://github.com/qpaycm/zc.bz2storage
     
 
 ### Usage
@@ -28,11 +26,11 @@ Originally, tested on JSON format 368kb string which resulted:
 	from ZODB import FileStorage, DB
 	
 	import bz2
-	import bz2storage
+	import zc.bz2storage
 	import transaction
 	
 	#	create storage
-	storage = bz2storage.Bz2Storage(FileStorage.FileStorage('data.fs'))
+	storage = zc.bz2storage.Bz2Storage(FileStorage.FileStorage('data.fs'))
 	#	create DB that uses our storage
 	db = DB(storage)
 	#	open DB connection object
