@@ -36,11 +36,11 @@ entry_points = """
 HERE = pathlib.Path(__file__).parent
 # The text of the README file
 README = (HERE / "README.txt").read_text()
-name, version = 'src.bc.bz2storage', '1.0.11'
+name, version = 'src.zc.bz2storage', '1.0.11'
 description="Compression improvement for ZODB",
 long_description=README,
 long_description_content_type="text/markdown",
-url="https://github.com/qpaycm/bc.bz2storage",
+url="https://github.com/qpaycm/zc.bz2storage",
 
 setup(
     author='vir2alexport',
@@ -69,7 +69,7 @@ setup(
     ],
     packages=[name.split('.')[0], name],
 	namespace_packages=[name.split('.')[0]],
-	package_dir={'bc.bz2storage':'src\\bc\\bz2storage'},
+	package_dir={'zc.bz2storage':'src\\zc\\bz2storage'},
     install_requires=install_requires,
     zip_safe=False,
     entry_points=entry_points,
