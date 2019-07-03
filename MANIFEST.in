@@ -1,5 +1,5 @@
-include src/bc/bz2storage/README.txt
-include src/bc/bz2storage/component.xml
+include src/zc/bz2storage/README.txt
+include src/zc/bz2storage/component.xml
 include bootstrap.py
 include buildout.cfg
 include tox.ini
