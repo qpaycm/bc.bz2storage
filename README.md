@@ -17,7 +17,6 @@ Originally, tested on JSON format 368kb string which resulted:
 
 ### Installation
 
-    pip install zc.bz2sotrage
     pip install git+https://github.com/qpaycm/zc.bz2storage
     
 ### Usage
