@@ -12,7 +12,7 @@
 #
 ##############################################################################
 import os, re, sys, unittest, doctest
-import bc.lockfile, time, threading
+import zc.lockfile, time, threading
 from zope.testing import renormalizing, setupstack
 import tempfile
 try:
@@ -22,15 +22,15 @@ except ImportError:
 
 checker = renormalizing.RENormalizing([
     # Python 3 adds module path to error class name.
-    (re.compile("bc\.lockfile\.LockError:"),
+    (re.compile("zc\.lockfile\.LockError:"),
      r"LockError:"),
     ])
 
 def inc():
     while 1:
         try:
-            lock = bc.lockfile.LockFile('f.lock')
-        except bc.lockfile.LockError:
+            lock = zc.lockfile.LockFile('f.lock')
+        except zc.lockfile.LockError:
             continue
         else:
             break
@@ -74,9 +74,9 @@ def many_threads_read_and_write():
 
 def pid_in_lockfile():
     r"""
-    >>> import os, bc.lockfile
+    >>> import os, zc.lockfile
     >>> pid = os.getpid()
-    >>> lock = bc.lockfile.LockFile("f.lock")
+    >>> lock = zc.lockfile.LockFile("f.lock")
     >>> f = open("f.lock")
     >>> _ = f.seek(1)
     >>> f.read().strip() == str(pid)
@@ -85,7 +85,7 @@ def pid_in_lockfile():
 
     Make sure that locking twice does not overwrite the old pid:
 
-    >>> lock = bc.lockfile.LockFile("f.lock")
+    >>> lock = zc.lockfile.LockFile("f.lock")
     Traceback (most recent call last):
       ...
     LockError: Couldn't lock 'f.lock'
@@ -105,9 +105,9 @@ def hostname_in_lockfile():
     hostname is correctly written into the lock file when it's included in the
     lock file content template
 
-    >>> import bc.lockfile
+    >>> import zc.lockfile
     >>> with patch('socket.gethostname', Mock(return_value='myhostname')):
-    ...     lock = bc.lockfile.LockFile("f.lock", content_template='{hostname}')
+    ...     lock = zc.lockfile.LockFile("f.lock", content_template='{hostname}')
     >>> f = open("f.lock")
     >>> _ = f.seek(1)
     >>> f.read().rstrip()
@@ -116,7 +116,7 @@ def hostname_in_lockfile():
 
     Make sure that locking twice does not overwrite the old hostname:
 
-    >>> lock = bc.lockfile.LockFile("f.lock", content_template='{hostname}')
+    >>> lock = zc.lockfile.LockFile("f.lock", content_template='{hostname}')
     Traceback (most recent call last):
       ...
     LockError: Couldn't lock 'f.lock'
@@ -143,7 +143,7 @@ class LockFileLogEntryTestCase(unittest.TestCase):
     """Tests for logging in case of lock failure"""
     def setUp(self):
         self.here = os.getcwd()
-        self.tmp = tempfile.mkdtemp(prefix='bc.lockfile-test-')
+        self.tmp = tempfile.mkdtemp(prefix='zc.lockfile-test-')
         os.chdir(self.tmp)
 
     def tearDown(self):
@@ -154,7 +154,7 @@ class LockFileLogEntryTestCase(unittest.TestCase):
         # PID and hostname are parsed and logged from lock file on failure
         with patch('os.getpid', Mock(return_value=123)):
             with patch('socket.gethostname', Mock(return_value='myhostname')):
-                lock = bc.lockfile.LockFile('f.lock',
+                lock = zc.lockfile.LockFile('f.lock',
                                             content_template='{pid}/{hostname}')
                 with open('f.lock') as f:
                     self.assertEqual(' 123/myhostname\n', f.read())
@@ -164,7 +164,7 @@ class LockFileLogEntryTestCase(unittest.TestCase):
     def test_unlock_and_lock_while_multiprocessing_process_running(self):
         import multiprocessing
 
-        lock = bc.lockfile.LockFile('l')
+        lock = zc.lockfile.LockFile('l')
         q = multiprocessing.Queue()
         p = multiprocessing.Process(target=q.get)
         p.daemon = True
@@ -172,7 +172,7 @@ class LockFileLogEntryTestCase(unittest.TestCase):
 
         # release and re-acquire should work (obviously)
         lock.close()
-        lock = bc.lockfile.LockFile('l')
+        lock = zc.lockfile.LockFile('l')
         self.assertTrue(p.is_alive())
 
         q.put(0)
