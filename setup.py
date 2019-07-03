@@ -36,7 +36,7 @@ entry_points = """
 HERE = pathlib.Path(__file__).parent
 # The text of the README file
 README = (HERE / "README.txt").read_text()
-name, version = 'src.zc.bz2storage', '1.0.11'
+name, version = 'zc.bz2storage', '1.0.11'
 description="Compression improvement for ZODB",
 long_description=README,
 long_description_content_type="text/markdown",
