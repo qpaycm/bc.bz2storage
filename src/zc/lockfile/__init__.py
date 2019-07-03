@@ -15,7 +15,7 @@
 import os
 import errno
 import logging
-logger = logging.getLogger("bc.lockfile")
+logger = logging.getLogger("zc.lockfile")
 
 class LockError(Exception):
     """Couldn't get a lock
