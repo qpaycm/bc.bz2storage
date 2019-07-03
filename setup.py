@@ -69,7 +69,7 @@ setup(
     ],
     packages=[name.split('.')[0], name],
 	namespace_packages=[name.split('.')[0]],
-	package_dir={'':'zc.bz2storage'},
+	package_dir={'zc.bz2storage':'zc\\bz2storage'},
     install_requires=install_requires,
     zip_safe=False,
     entry_points=entry_points,
