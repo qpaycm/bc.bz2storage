@@ -6,16 +6,16 @@ locks.  These are locks that are implemented with lock files and
 OS-provided locking facilities.  To create a lock, instantiate a
 LockFile object with a file name:
 
-    >>> import bc.lockfile
-    >>> lock = bc.lockfile.LockFile('lock')
+    >>> import zc.lockfile
+    >>> lock = zc.lockfile.LockFile('lock')
 
 If we try to lock the same name, we'll get a lock error:
 
     >>> import zope.testing.loggingsupport
-    >>> handler = zope.testing.loggingsupport.InstalledHandler('bc.lockfile')
+    >>> handler = zope.testing.loggingsupport.InstalledHandler('zc.lockfile')
     >>> try:
-    ...     bc.lockfile.LockFile('lock')
-    ... except bc.lockfile.LockError:
+    ...     zc.lockfile.LockFile('lock')
+    ... except zc.lockfile.LockError:
     ...     print("Can't lock file")
     Can't lock file
 
@@ -36,7 +36,7 @@ The lock file is not removed.  It is left behind:
 
 Of course, now that we've released the lock, we can create it again:
 
-    >>> lock = bc.lockfile.LockFile('lock')
+    >>> lock = zc.lockfile.LockFile('lock')
     >>> lock.close()
 
 .. Cleanup
@@ -60,7 +60,7 @@ or instead of the PID.
 Use the ``content_template`` keyword argument to ``LockFile`` to specify a
 custom lock file content format:
 
-    >>> lock = bc.lockfile.LockFile('lock', content_template='{pid};{hostname}')
+    >>> lock = zc.lockfile.LockFile('lock', content_template='{pid};{hostname}')
     >>> lock.close()
 
 If you now inspected the lock file, you would see e.g.:
